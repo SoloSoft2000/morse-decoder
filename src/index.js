@@ -39,8 +39,19 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     // write your solution here
+    return expr.length > 0 ? decode_one(expr.slice(0,10)) + decode(expr.slice(10, expr.length)) : ""
+}
+
+function decode_one(one) {
+    if(one.indexOf("*")===0) {
+        return " ";
+    }
+    symvol = one.replace(/00/g, "").replace(/10/g, ".").replace(/11/g, "-");
+    return MORSE_TABLE[symvol]
 }
 
 module.exports = {
     decode
 }
+
+//console.log( decode("00101010100000000010001011101000101110100000111111**********00001011110000111111000010111000101110100000111010"));
